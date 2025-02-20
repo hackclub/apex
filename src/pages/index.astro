@@ -32,6 +32,24 @@ import Dropdown from "../components/Dropdown.astro";
     />
     <meta property="og:image" content={wordmark.src} />
 
+    <style>
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-80px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .floating-balloon {
+        animation: float 8s ease-in-out infinite;
+      }
+    </style>
+
     <title>Apex</title>
   </head>
   <body>
@@ -189,15 +207,17 @@ import Dropdown from "../components/Dropdown.astro";
 
       <img
         src="/balloon.png"
-        class="absolute left-[5%] top-[20%] hidden md:block"
+        class="floating-balloon absolute left-[5%] top-[20%] hidden md:block"
       />
       <img
         src="/balloon.png"
-        class="absolute right-[5%] top-1/3 hidden md:block"
+        class="floating-balloon animate-delay-6000 absolute right-[5%] top-1/3 hidden md:block"
+        style="animation-delay: 6s;"
       />
       <img
         src="/balloon.png"
-        class="absolute left-[5%] top-[40%] hidden md:block"
+        class="floating-balloon animate-delay-6000 absolute left-[5%] top-[40%] hidden md:block"
+        style="animation-delay: 6s;"
       />
     </div>
   </body>
