@@ -128,8 +128,6 @@ import Dropdown from "../components/Dropdown.astro";
 
       <!-- 
 TODO:
-* Are flight's covered? What about transportation from the airport?
-* My parents are concerned. What should I do?
 * Do we need to stay overnight?
 * What if I need help?
 * Who's running this?
@@ -218,6 +216,12 @@ TODO:
           to $40 worth of transport to and from the airport.
         </Dropdown>
 
+        <Dropdown question="Do we need to stay overnight?">
+          Yep! To make sure the event is safe, we'll be staying overnight at the
+          venue. Participants will be expected to bring their own sleeping bags,
+          but please contact us if you don't have one.
+        </Dropdown>
+
         <h1 class="mt-10 w-1/2 text-2xl">Technical questions</h1>
 
         <Dropdown question="What's a high altitude balloon?">
@@ -231,9 +235,23 @@ TODO:
           <br />
           If you're interested in learning more, watch <a
             class="underline"
+            target="_blank"
             href="https://www.youtube.com/watch?v=gx_RJoNerg0"
             >this video from the New England Weather Balloon Society</a
           >.
+        </Dropdown>
+
+        <Dropdown
+          question="What will the launch process and the event be like?"
+        >
+          Participants will first arrive and finalize their projects before we
+          drive out as a group to the launch site. Projects are attached to a
+          weather balloon, ascend to the stratosphere, and then descend via
+          parachute. Different teams will go out to track and recover their
+          projects before analyzing the data. Be prepared for some hiking
+          through the woods! Next, we will analyze the collected data before
+          finally presenting it to the hackathon. There will also be an awesome
+          post-launch celebration and a watch party of the video cams.
         </Dropdown>
 
         <Dropdown question="What can I launch?">
@@ -250,6 +268,7 @@ TODO:
           project will get to about 3/8 of the way to space.
         </Dropdown>
 
+        <!-- CHANGE THIS, GET SOME LINKS -->
         <Dropdown question="Where can I learn more about balloons?">
           We have a <a class="underline" href="/resources/balloons">page</a>
           with more information about balloons.
@@ -257,18 +276,25 @@ TODO:
 
         <h1 class="mt-10 w-1/2 text-2xl">Final notes</h1>
 
+        <!-- EMAIL ADDRESS IS PROBABLY WRONG -->
         <Dropdown question="What if I have more questions?">
           If you have any more questions, feel free to reach out to us at
-          <a class="underline" href="mailto:apexhacks@gmail.com"
-            >apexhacks@gmail.com</a
-          >. We're here to help!
+          <a class="underline" href="mailto:help@apex.hackclub.com"
+            >help@apex.hackclub.com</a
+          >, or drop a question in the #apex channel of <a
+            class="underline"
+            href="https://hackclub.com/slack/?event=Apex"
+            target="_blank">the Hack Club Slack!</a
+          > We're here to help!
         </Dropdown>
 
+        <!-- DONT FORGET TO CHANGE THE FILE TO VIEW ONLY -->
         <Dropdown question="My parents are concerned. What can I do?">
-          That's natural - this all seems a little wild. Don't worry, we can help. We have a parent's guide just for this purpose. You can find it <a
+          That's natural - this all seems a little wild. Don't worry, we can
+          help. We have a parent's guide just for this purpose. You can find it <a
             class="underline"
-            href="/resources/parents"
-            >here</a
+            href="https://docs.google.com/document/d/1Dj0hCN9b1P7sPskRS3Z10Ju9wWvB5wauDL7DU0ZH9MY/edit?usp=sharing"
+            target="_blank">here</a
           >.
         </Dropdown>
       </div>
