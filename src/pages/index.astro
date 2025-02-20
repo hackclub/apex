@@ -11,6 +11,7 @@ import wordmark from "../assets/wordmark.png";
 
 import Step from "../components/Step.astro";
 import Footer from "../components/Footer.astro";
+import Dropdown from "../components/Dropdown.astro";
 ---
 
 <html lang="en">
@@ -108,43 +109,63 @@ import Footer from "../components/Footer.astro";
       </div>
 
       <div
-        class="flex w-full flex-col items-center justify-center gap-5 bg-cardblue p-3 md:flex-row md:items-start md:gap-0 md:p-20"
+        class="flex h-fit w-full flex-wrap items-start justify-center gap-5 bg-cardblue p-5 md:p-20"
       >
-        <div
-          class="flex w-full flex-col items-start justify-start gap-2 p-3 md:w-1/2"
-        >
-          <p class="w-full text-center text-2xl font-bold">
-            What's a high altitude balloon?
-          </p>
-          <p class="text-md w-full text-center md:text-lg">
-            High altitude balloons (HABs) are an accessible way to send research
-            and recreational payloads into altitudes upwards of 100,000 feet.
-            While they demand meticulous planning and logistics, they reward
-            those who launch them with the chance to send their payloads to
-            tremendous altitudes. We are here to bring you that experience, but
-            without the fierce logistics and infrastructure that often come with
-            a launch! <br /><br />If you're interested in learning more, watch <a
-              class="underline"
-              href="https://www.youtube.com/watch?v=gx_RJoNerg0"
-              >this video from the New England Weather Balloon Society</a
-            >.
-          </p>
-        </div>
+        <Dropdown question="What's a hackathon?">
+          A hackathon is a 12-48 hour event where groups of people can get
+          together and create! Don't worry, we're not doing any computer
+          hacking. This hackathon is a bit unorthodox - it's a 3 month long
+          journey, culminating in the traditional 48 hour event, but with some
+          twists.
+        </Dropdown>
 
-        <div
-          class="flex w-full flex-col items-start justify-start gap-2 p-3 md:w-1/2"
-        >
-          <p class="w-full text-center text-2xl font-bold">
-            Do I need experience to sign up?
-          </p>
-          <p class="text-md w-full text-center md:text-lg">
-            Nope! Apex is open to all teenagers interested in launching projects
-            on high altitude balloons. We will provide lots of resources to help
-            you along the way of creating your project!
-          </p>
-        </div>
+        <Dropdown question="Who's this for?">
+          This is for any high schooler or middle schooler 18 or under who's
+          interested in working on a large project. Reaching out of you comfort
+          zone is necessary! If you've ever wanted to branch into the world of
+          hardware, this is perfect for you. Or maybe, you just want to switch
+          things up a little.
+          <br />
+          Don't worry if you don't have any experience - most people don't! We'll
+          help you along the way if you need it.
+        </Dropdown>
+
+        <Dropdown question="Do I need a team?">
+          Yes, you need a team of 3-4 people. This is because we have limited
+          space on the balloon, and we want to make sure everyone gets a chance
+          to launch their project. If you don't have a team, don't worry! We'll
+          help you find one.
+        </Dropdown>
+
+        <Dropdown question="Do I need experience to sign up?">
+          Nope! Apex is open to all teenagers interested in launching projects
+          on high altitude balloons. We will provide lots of resources to help
+          you along the way of creating your project, in addition to weekly
+          working calls to refine your idea and help you build.
+        </Dropdown>
+
+        <Dropdown question="What's a high altitude balloon?">
+          High altitude balloons (HABs) are an accessible way to send research
+          and recreational payloads into altitudes upwards of 100,000 feet.
+          While they demand meticulous planning and logistics, they reward those
+          who launch them with the chance to send their payloads to tremendous
+          altitudes. We are here to bring you that experience, but without the
+          fierce logistics and infrastructure that often come with a launch!
+          <br />
+          If you're interested in learning more, watch <a
+            class="underline"
+            href="https://www.youtube.com/watch?v=gx_RJoNerg0"
+            >this video from the New England Weather Balloon Society</a
+          >.
+        </Dropdown>
+
+        <Dropdown question="What if I have more questions?">
+          If you have any more questions, feel free to reach out to us at
+          <a class="underline" href="mailto:apexhacks@gmail.com"
+            >apexhacks@gmail.com</a
+          >. We're here to help!
+        </Dropdown>
       </div>
-
       <div class="flex w-full justify-evenly bg-sky">
         <Image
           src={orpheusflag}

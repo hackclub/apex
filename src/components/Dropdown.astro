@@ -1,0 +1,24 @@
+---
+const { question } = Astro.props;
+---
+
+<div class="sm:w-3/4 md:w-1/2 border rounded-lg overflow-hidden">
+  <button
+    class="w-full p-4 text-left flex justify-between items-center bg-[#122247]"
+    onclick="this.nextElementSibling.classList.toggle('hidden')"
+  >
+    <span class="text-xl">{question}</span>
+    <svg
+      class="w-5 h-5 transform transition-transform"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+  <div class="w-full p-4 hidden bg-[#122247]">
+    <slot />
+  </div>
+</div>
