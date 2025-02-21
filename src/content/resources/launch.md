@@ -12,14 +12,13 @@ smoothly.
 ### Shipping
 
 You may either ship your project in advance (you must pay for your own shipping)
-or bring it with you on the day of the launch. Please ensure that it is
-completely finished and adheres to the [limitations](/resources/limitations).
+or bring it with you on the day of the launch. We highly recommend bringing it with you, either via car or plane because you can make sure it's nice and safe. Also, please ensure that it is completely finished and adheres to the [limitations](/resources/limitations).
 
-If you are shipping your project, ship it to: (no address yet).
+We are still working out an address to ship your project to, stay posted for details. 
 
 _Check out [Pirate Ship](https://www.pirateship.com/) for cheap shipping rates!_
 
-### Launch!
+### Launch
 
 The Apex launch will be a 3-day event in Boston, hosted at the WPS Institute.
 Below is a tentative schedule, but it is likely to change as more details are
