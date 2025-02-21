@@ -59,11 +59,11 @@ import Dropdown from "../components/Dropdown.astro";
       <div
         class="relative flex flex-col items-center justify-center gap-3 pt-24"
       >
-        <Image src={wordmark} alt="Apex wordmark" class="w-1/2 md:w-1/3" />
+        <Image src={wordmark} alt="Apex wordmark" class="w-full md:w-3/4" />
         <p class="mx-10 text-center font-special text-2xl md:text-3xl">
-          A 3 month journey to launch projects <strong class="font-extrabold"
-            >100,000 ft into the air</strong
-          > on high-altitude balloons in Boston
+          Send projects <strong class="font-extrabold"
+            >100,000 ft skyward</strong
+          > in Boston
         </p>
         <Image
           class="absolute left-0 top-5 w-1/4 md:-left-10"
@@ -82,9 +82,9 @@ import Dropdown from "../components/Dropdown.astro";
       >
         <Step
           num={1}
-          date={new Date("2025-03-01T05:00")}
+          date={new Date("2025-03-23T05:00")}
           title="Register"
-          desc="Signing up for Apex is free - you just need a team of fellow teens ready to dive into making a project!"
+          desc="Signing up for Apex is easy - no need for a team, idea, or commitment. Just RSVP!"
           action={{
             text: "Signup",
             link: "/signup",
@@ -95,7 +95,7 @@ import Dropdown from "../components/Dropdown.astro";
           num={2}
           date={new Date("2025-04-01T05:00")}
           title="Submit proposal"
-          desc="Finalize your ideas and designs with your team and submit them to the review team!"
+          desc="Finalize your ideas and designs with your team and submit them for review!"
           action={{
             text: "Resources",
             link: "/resources/proposal",
@@ -104,9 +104,9 @@ import Dropdown from "../components/Dropdown.astro";
         />
         <Step
           num={3}
-          date={new Date("2025-06-05T05:00")}
+          date={new Date("2025-5-15T05:00")}
           title="Build your project"
-          desc="After prototyping and iteration, put together the project that will launch on the HAB and ship it to the launch location!"
+          desc="After prototyping and iteration, finalize the project for a final Zoom with the engineering team."
           action={{
             text: "Details",
             link: "/resources/building",
@@ -117,7 +117,7 @@ import Dropdown from "../components/Dropdown.astro";
           num={4}
           date={new Date("2025-06-21T05:00")}
           title="LAUNCH!"
-          desc="Head over to Boston to launch, recover, and analyze your project during a 3-day event on June 20-22!"
+          desc="Head over to Boston to launch, recover, and analyze your project during the 3-day event!"
           action={{
             text: "Info",
             link: "/resources/launch",
