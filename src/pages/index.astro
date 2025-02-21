@@ -126,14 +126,6 @@ import Dropdown from "../components/Dropdown.astro";
         />
       </div>
 
-      <!-- 
-TODO:
-* Do we need to stay overnight?
-* What if I need help?
-* Who's running this?
-* Is there an online community?
- -->
-
       <div
         class="flex h-fit w-full flex-col items-center justify-center gap-5 bg-cardblue p-5 md:p-20"
       >
@@ -180,6 +172,40 @@ TODO:
           and flights.
         </Dropdown>
 
+        <Dropdown question="Who's running this? What's Hack Club?">
+          The team at Apex is partnering with Hack Club to make this possible.
+          <br />
+          <br />
+          Hack Club is a 501(c)(3) nonprofit organization, founded in 2014, with
+          the mission of fostering an empowered generation of coders, leaders, and
+          innovators. “Hacking” is being constructively redefined as a means of creative
+          coding—apps, games, websites etc. Through Hack Club's global network of
+          student-led computer science clubs, over 50K+ teenagers engage with their
+          programs annually.
+          <br />
+          <br />
+          All of Hack Club{"'"}s programs are free and universally accessible.
+          They{"'"}re supported by GitHub founder Tom Preston-Werner, Dell
+          founder Michael Dell, SpaceX{"'"}s Gwynne Shotwell, executives at
+          Apple and Microsoft, and many up and coming startups as well.
+          <br />
+          <br />
+          Every year, Hack Club runs a few transformative events for teenagers interested
+          in technology. In the past, they{"'"}ve chartered a train across
+          Canada, ran hackathons in San Francisco & New Delhi, hacked at a
+          Vermont campground, and sent out $50,000 in hardware grants.
+        </Dropdown>
+
+        <Dropdown question="Is there an online community for this?">
+          There sure is! We have a channel on the Hack Club Slack called #apex.
+          Join <a
+            class="underline"
+            href="https://hackclub.com/slack/?event=Apex"
+            target="_blank">here</a
+          >! We provide support here and post important updates in
+          #apex-bulletin. For that reason, membership is mandatory!
+        </Dropdown>
+
         <h1 class="mt-10 w-1/2 text-2xl">Logistics</h1>
 
         <Dropdown question="Where and when is this happening?">
@@ -220,6 +246,14 @@ TODO:
           Yep! To make sure the event is safe, we'll be staying overnight at the
           venue. Participants will be expected to bring their own sleeping bags,
           but please contact us if you don't have one.
+        </Dropdown>
+
+        <Dropdown question="What if I get stuck and need help?">
+          If you get stuck, don't worry! We have a team of mentors who are here
+          to help you. They're all experienced makers and are here to help you
+          with any problems you might have. We'll also have weekly or bi-weekly
+          working calls where you can pop in, ask questions, and receive help,
+          in addition to our monthly mandatory 1:1 teams check-ins.
         </Dropdown>
 
         <h1 class="mt-10 w-1/2 text-2xl">Technical questions</h1>
