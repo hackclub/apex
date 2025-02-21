@@ -9,9 +9,8 @@ a proposal to submit to the Apex team.
 ### Step 1: Form a team
 
 Putting together a proposal, designing a project, and building it is no easy
-task. For that reason, the Apex team strongly recommends that you form teams of
-2-5 people. While it's not impossible to do it by yourself, working with a team
-will not only be a lot easier on you, but it will also be a lot more fun!
+task. For that reason, we require you to do form a team of 3-4 people. While it's not impossible to do it by yourself, working with a team
+will not only be a lot easier on you, but it will also be a lot more fun! We also have a limited amount of weight that we can launch, so we want to maximize the number of people who can work on a project. 
 
 If you already have a team, that's great! Make sure everyone
 [signs up for Apex](https://apexhacks.org/signup) individually, and when it
@@ -36,16 +35,16 @@ really the limit! While there are many technical constraints outlined in
 now. For now, just thing of anything and everything that could possibly yield
 interesting results if launched 100,000ft into the air.
 
-If you need some inspiration, here's some ideas others have had. We encourage
+If you need some inspiration, here are some ideas and past projects that have been done. We encourage
 you to make your project your own, though:
 
-- 🫧 Ozone sensor
-- ☀️ Solar tracker
-- ⚡️ Ambient static electricity collector
-- 🧪 Chemistry experiment
-
-You'll notice a common theme among several ideas: they log various kinds of
-data. There's a lot to find out about what happens at high elevations!
+- Solar tracker
+- Ambient static electricity collector
+- Some sort of biochemistry experiment
+- Balloon-launched rocket
+- Glider launched from a balloon (hmm, funny, maybe [StratoSoar](https://github.com/crnicholson/StratoSoar-MK3))
+- Chicken that poops glitter 
+- High-altitude balloon tracking infrastructure (wait a second, is this [Tiny4FSK](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK)?)
 
 #### Step 2B: Explore each idea in detail
 
@@ -69,6 +68,8 @@ Proceed to the next step. If you've got multiple promising ideas left, that's
 awesome too! The deciding factor for what project you end up building will
 ultimately be which one sounds more fun to your team.
 
+Oh, and one last thing: your team should have between $300 and $400 to make your creation, so keep budget in mind!
+
 ### Step 3: Writing a proposal
 
 You've made it a long way. You've formed a team, you've brainstormed ideas, and
@@ -86,15 +87,13 @@ With that said, here are the guidelines for the proposal:
 
 - It should include the names of each member of your team
 - It should have a project title
-- It should breifly describe what the project will look like and what you expect
+- It should briefly describe what the project will look like and what you expect
   from it (like a hypothesis)
 - It should list the data that will be collected from the project
 - It should give a rough idea of how the project will be constructed
   (components, electronics?)
 - It should disclose any concerns about the project, such as potential safety
   issues or expensive components
-  - Note that we may be able to fund a portion of the experiment, but not all of
-    it. If it is a PCB, check out [OnBoard](https://hackclub.com/onboard/)!
 
 Make sure to think through each element of this proposal carefully. It's OK if
 there's still parts about the project that you're unsure of - just include that
