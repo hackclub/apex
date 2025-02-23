@@ -4,11 +4,6 @@ import "@fontsource/jersey-25";
 import "@fontsource/jetbrains-mono";
 import "@fontsource/jockey-one";
 
-import orpheusflag from "../assets/orpheusflag.png";
-import orpheusrocket from "../assets/orpheusrocket.png";
-import orpheusmoon from "../assets/orpheusmoon.png";
-import wordmark from "../assets/wordmark.png";
-
 const targetDate = new Date("2025-06-01T00:00:00");
 ---
 
@@ -16,21 +11,16 @@ const targetDate = new Date("2025-06-01T00:00:00");
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.png" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
     <meta property="og:type" content="website" />
     <meta name="apple-mobile-web-app-title" content="Apex" />
     <meta property="og:site_name" content="Apex" />
     <meta property="og:title" content="Apex" />
-    <meta
-      name="description"
-      property="og:description"
-      content="A 3 month journey to launch projects 100,000 ft into the air on high-altitude balloons in Boston"
-    />
-    <meta property="og:image" content={wordmark.src} />
+    <meta name="description" property="og:description" content="BOOM." />
 
-    <title>Apex</title>
+    <title>WE BRING THE BOOM</title>
 
     <style>
       @keyframes float {
@@ -48,15 +38,28 @@ const targetDate = new Date("2025-06-01T00:00:00");
       .floating-balloon {
         animation: float 8s ease-in-out infinite;
       }
+
+      @media (max-width: 768px) {
+        .floating-balloon {
+          display: none; /* Hide balloons on smaller screens */
+        }
+      }
     </style>
 
     <script>
       function updateCountdown() {
-        const targetDate = new Date("2025-06-01T00:00:00").getTime();
+        const targetDate = new Date("2025-03-02T00:00:00").getTime();
 
         function update() {
           const now = new Date().getTime();
           const distance = targetDate - now;
+
+          if (distance < 0) {
+            clearInterval(interval);
+            document.getElementById("countdown").innerHTML =
+              "<p>Launch Successful!</p>";
+            return;
+          }
 
           const days = Math.floor(distance / (1000 * 60 * 60 * 24));
           const hours = Math.floor(
@@ -67,42 +70,20 @@ const targetDate = new Date("2025-06-01T00:00:00");
           );
           const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-          const daysElement = document.getElementById("days");
-          if (daysElement) {
-            daysElement.textContent = days.toString().padStart(2, "0");
-          }
-          const hoursElement = document.getElementById("hours");
-          if (hoursElement) {
-            hoursElement.textContent = hours.toString().padStart(2, "0");
-          }
-          const minutesElement = document.getElementById("minutes");
-          if (minutesElement) {
-            minutesElement.textContent = minutes.toString().padStart(2, "0");
-          }
-          const secondsElement = document.getElementById("seconds");
-          if (secondsElement) {
-            secondsElement.textContent = seconds.toString().padStart(2, "0");
-          }
-
-          if (distance < 0) {
-            clearInterval(interval);
-            const daysElement = document.getElementById("days");
-            if (daysElement) {
-              daysElement.textContent = "00";
-            }
-            const hoursElement = document.getElementById("hours");
-            if (hoursElement) {
-              hoursElement.textContent = "00";
-            }
-            const minutesElement = document.getElementById("minutes");
-            if (minutesElement) {
-              minutesElement.textContent = "00";
-            }
-            const secondsElement = document.getElementById("seconds");
-            if (secondsElement) {
-              secondsElement.textContent = "00";
-            }
-          }
+          document.getElementById("days").textContent = String(days).padStart(
+            2,
+            "0"
+          );
+          document.getElementById("hours").textContent = String(hours).padStart(
+            2,
+            "0"
+          );
+          document.getElementById("minutes").textContent = String(
+            minutes
+          ).padStart(2, "0");
+          document.getElementById("seconds").textContent = String(
+            seconds
+          ).padStart(2, "0");
         }
 
         const interval = setInterval(update, 1000);
@@ -112,103 +93,52 @@ const targetDate = new Date("2025-06-01T00:00:00");
       document.addEventListener("DOMContentLoaded", updateCountdown);
     </script>
   </head>
-  <body>
-    <div
-      class="relative flex min-h-screen w-full flex-col items-center justify-start bg-gradient-to-b from-[#000000] via-[#122247] to-sky text-white"
-    >
-      <div
-        class="relative flex flex-col items-center justify-center gap-3 pt-24"
-      >
-        <Image src={wordmark} alt="Apex wordmark" class="w-full md:w-3/4" />
-        <Image
-          class="absolute left-0 top-5 w-1/4 md:-left-10"
-          src={orpheusrocket}
-          alt="Orpheus on a rocket"
-        />
-        <Image
-          class="absolute right-0 top-5 w-1/4 md:-right-10 md:w-1/6"
-          src={orpheusmoon}
-          alt="Orpheus on the moon"
-        />
-      </div>
 
-      <div class="flex flex-col items-center justify-center space-y-4 my-8">
-        <h2 class="text-2xl md:text-4xl font-bold text-white">
-          Launch Countdown
-        </h2>
-        <div class="grid grid-flow-col gap-5 text-center auto-cols-max">
-          <div
-            class="flex flex-col p-2 bg-neutral-900 rounded-box text-neutral-content"
-          >
+  <body class="bg-gradient-to-b from-[#000000] via-[#122247] to-sky text-white">
+    <header
+      class="relative flex min-h-screen w-full flex-col items-center justify-center"
+    >
+      <img
+        src="/balloon.png"
+        class="floating-balloon absolute top-[10%] hidden md:block"
+        alt="Floating balloon"
+        aria-label="Floating balloon"
+      />
+
+      <section
+        class="h-1/2 w-full flex flex-col items-center justify-center space-y-4 my-8"
+      >
+        <div
+          id="countdown"
+          class="grid grid-flow-col gap-5 text-center auto-cols-max"
+        >
+          <div class="flex flex-col p-2 rounded-box text-neutral-content">
             <span class="countdown font-mono text-3xl md:text-5xl" id="days"
               >00</span
             >
             days
           </div>
-          <div
-            class="flex flex-col p-2 bg-neutral-900 rounded-box text-neutral-content"
-          >
+          <div class="flex flex-col p-2 rounded-box text-neutral-content">
             <span class="countdown font-mono text-3xl md:text-5xl" id="hours"
               >00</span
             >
             hours
           </div>
-          <div
-            class="flex flex-col p-2 bg-neutral-900 rounded-box text-neutral-content"
-          >
+          <div class="flex flex-col p-2 rounded-box text-neutral-content">
             <span class="countdown font-mono text-3xl md:text-5xl" id="minutes"
               >00</span
             >
             min
           </div>
-          <div
-            class="flex flex-col p-2 bg-neutral-900 rounded-box text-neutral-content"
-          >
+          <div class="flex flex-col p-2 rounded-box text-neutral-content">
             <span class="countdown font-mono text-3xl md:text-5xl" id="seconds"
               >00</span
             >
             sec
           </div>
         </div>
-      </div>
-
-      <div class="flex w-full justify-evenly bg-sky">
-        <Image
-          src={orpheusflag}
-          alt="Orpheus holding a flag"
-          class="relative top-5 w-1/4"
-        />
-
-        <Image
-          src={orpheusflag}
-          alt="Orpheus holding a flag"
-          class="relative top-5 w-1/4 -scale-x-[1]"
-        />
-      </div>
-
-      <img
-        src="/balloon.png"
-        class="floating-balloon absolute left-[5%] top-[15%] hidden md:block"
-      />
-      <img
-        src="/balloon.png"
-        class="floating-balloon animate-delay-6000 absolute right-[5%] top-1/3 hidden md:block"
-        style="animation-delay: 6s;"
-      />
-      <img
-        src="/balloon.png"
-        class="floating-balloon animate-delay-6000 absolute left-[5%] top-[40%] hidden md:block"
-        style="animation-delay: 6s;"
-      />
-      <img
-        src="/balloon.png"
-        class="floating-balloon animate-delay-6000 absolute right-[5%] top-[60%] hidden md:block"
-        style="animation-delay: 6s;"
-      />
-      <img
-        src="/balloon.png"
-        class="floating-balloon absolute left-[5%] top-[70%] hidden md:block"
-      />
-    </div>
+        <h1 class="font-bold text-3xl">TILL EXPLOSION?</h1>
+      </section>
+    </header>
   </body>
 </html>
