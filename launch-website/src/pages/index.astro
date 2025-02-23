@@ -3,8 +3,6 @@ import { Image } from "astro:assets";
 import "@fontsource/jersey-25";
 import "@fontsource/jetbrains-mono";
 import "@fontsource/jockey-one";
-
-const targetDate = new Date("2025-06-01T00:00:00");
 ---
 
 <html lang="en">
@@ -38,17 +36,11 @@ const targetDate = new Date("2025-06-01T00:00:00");
       .floating-balloon {
         animation: float 8s ease-in-out infinite;
       }
-
-      @media (max-width: 768px) {
-        .floating-balloon {
-          display: none; /* Hide balloons on smaller screens */
-        }
-      }
     </style>
 
     <script>
       function updateCountdown() {
-        const targetDate = new Date("2025-03-02T00:00:00").getTime();
+        const targetDate = new Date("2025-03-02T20:00:00").getTime();
 
         function update() {
           const now = new Date().getTime();
@@ -100,7 +92,7 @@ const targetDate = new Date("2025-06-01T00:00:00");
     >
       <img
         src="/balloon.png"
-        class="floating-balloon absolute top-[10%] hidden md:block"
+        class="floating-balloon absolute top-[10%]"
         alt="Floating balloon"
         aria-label="Floating balloon"
       />
