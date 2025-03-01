@@ -35,4 +35,4 @@ before the launch. Details on shipping your project and the launch are on the
 [launch info page](/resources/launch).**
 
 Again, if you have any questions, ask in the
-[#apex](https://apexhacks.org/slack-channel) channel on the Hack Club Slack!
+[#apex](/slack-channel) channel on the Hack Club Slack!

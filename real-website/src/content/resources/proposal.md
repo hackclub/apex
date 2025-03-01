@@ -13,11 +13,11 @@ task. For that reason, we require you to do form a team of 3-4 people. While it'
 will not only be a lot easier on you, but it will also be a lot more fun! We also have a limited amount of weight that we can launch, so we want to maximize the number of people who can work on a project. 
 
 If you already have a team, that's great! Make sure everyone
-[signs up for Apex](https://apexhacks.org/signup) individually, and when it
+[signs up for Apex](https://forms.hackclub.com/apex) individually, and when it
 comes time to submit a proposal, make sure to include everyone's names.
 
 If you don't already have a team (or would like more members), that's also
-great! Talk around in the [#apex](https://apexhacks.org/slack-channel) channel
+great! Talk around in the [#apex](https://apex.hackclub.com/slack-channel) channel
 on the Hack Club Slack, and you'll find someone cool to work with on your Apex
 project :)
 
@@ -55,7 +55,7 @@ a couple ideas are simply too impractical (take a look at the
 concept slightly to make it better, or you might just have to scrap it. Other
 ideas might sound good, but you have no idea how to make it happen. Don't worry!
 _\<insert your favorite search engine here\>_ and the
-[#apex](https://apexhacks.org/slack-channel) channel on Slack are your best
+[#apex](https://apex.hackclub.com/slack-channel) channel on Slack are your best
 friends, and at least one of them will be able to point you in the right
 direction.
 
@@ -104,5 +104,5 @@ TODO: add example proposal?
 -->
 
 **When your team has finished the proposal, submit it on the
-[Proposal Submission Form](https://apexhacks.org/submit-proposal)! Proposals are
+[Proposal Submission Form](https://forms.hackclub.com/submit-apex-proposal)! Proposals are
 due on April 1st.**

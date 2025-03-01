@@ -7,9 +7,8 @@ import tailwind from "@astrojs/tailwind";
 export default defineConfig({
   integrations: [tailwind()],
   redirects: {
-    "/signup": "https://airtable.com/app7H902kTEPSGVDw/pag2xZxhI3yfQwrXv/form",
-    "/submit-proposal":
-      "https://airtable.com/app7H902kTEPSGVDw/paghle5GsxnomNFPL/form",
-    "slack-channel": "https://hackclub.slack.com/archives/C07GUTVD20G",
+    "/signup": "https://forms.hackclub.com/apex",
+    "/submit-proposal": "https://forms.hackclub.com/submit-apex-proposal",
+    "/slack-channel": "https://hackclub.slack.com/archives/C08EFAYBZ38",
   },
 });
