@@ -3,6 +3,7 @@ import "@fontsource/jockey-one";
 import "@fontsource/jetbrains-mono";
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import Analytics from "@vercel/analytics/astro";
 
 import wordmark from "../../assets/wordmark.png";
 import Footer from "../../components/Footer.astro";
@@ -17,6 +18,8 @@ const allResources = await getCollection("resources");
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Apex Resources</title>
+
+    <Analytics />
   </head>
   <body>
     <div
