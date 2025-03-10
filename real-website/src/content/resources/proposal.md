@@ -9,7 +9,7 @@ a proposal to submit to the Apex team.
 ### Step 1: Form a team
 
 Putting together a proposal, designing a project, and building it is no easy
-task. For that reason, we require you to do form a team of 3-4 people. While it's not impossible to do it by yourself, working with a team
+task. For that reason, we require you to do form a team of 2-4 people. While it's not impossible to do it by yourself, working with a team
 will not only be a lot easier on you, but it will also be a lot more fun! We also have a limited amount of weight that we can launch, so we want to maximize the number of people who can work on a project. 
 
 If you already have a team, that's great! Make sure everyone
