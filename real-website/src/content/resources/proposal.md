@@ -41,8 +41,6 @@ you to make your project your own, though:
 - Solar tracker
 - Ambient static electricity collector
 - Some sort of biochemistry experiment
-- Balloon-launched rocket
-- Glider launched from a balloon (hmm, funny, maybe [StratoSoar](https://github.com/crnicholson/StratoSoar-MK3))
 - Chicken that poops glitter 
 - High-altitude balloon tracking infrastructure (wait a second, is this [Tiny4FSK](https://github.com/New-England-Weather-Balloon-Society/Tiny4FSK)?)
 
