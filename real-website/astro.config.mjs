@@ -11,4 +11,5 @@ export default defineConfig({
     "/submit-proposal": "https://forms.hackclub.com/submit-apex-proposal",
     "/slack-channel": "https://hackclub.slack.com/archives/C08EFAYBZ38",
   },
+  output: "hybrid",
 });
