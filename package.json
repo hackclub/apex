@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "airtable": "^0.12.2",
-    "uuidv4": "^6.2.13"
-  }
-}
