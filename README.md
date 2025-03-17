@@ -9,7 +9,7 @@ building their projects!
 
 _What's Apex, you ask? Apex is a 3 month journey to launch projects 100,000 ft
 into the air on high-altitude balloons in Boston! Check out the
-[website](https://apex.hackclub.cp,) to learn more :)_
+[website](https://apex.hackclub.com) to learn more :)_
 
 ## Technical stuff
 
