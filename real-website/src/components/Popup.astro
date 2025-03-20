@@ -1,0 +1,95 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div 
+  class={`fixed inset-0 z-50 items-center justify-center hidden`}
+  id={id}
+>
+  <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+  
+  <div class="relative w-11/12 max-w-md bg-white rounded-lg shadow-xl p-6 z-10">
+    <button 
+      class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+      id={`close-button-${id}`}
+    >
+      <svg 
+        class="w-6 h-6" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          stroke-width="2" 
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+
+    <div class="mb-4">
+      <h2 class="text-xl font-bold text-gray-900">
+        <slot name="title" />
+      </h2>
+    </div>
+
+    <div class="text-gray-600">
+      <slot name="content" />
+    </div>
+  </div>
+</div>
+
+<script>
+  class PopupManager {
+    popup: HTMLElement | null;
+    closeButton: HTMLElement | null;
+    constructor(id: string) {
+      this.popup = document.getElementById(id);
+      this.closeButton = document.getElementById(`close-button-${id}`);
+      this.setupEventListeners();
+    }
+
+    show() {
+      if (this.popup) {
+        this.popup.classList.remove('hidden');
+        this.popup.style.display = 'flex';
+      }
+    }
+
+    close() {
+      if (this.popup) {
+        this.popup.classList.add('hidden');
+        this.popup.style.display = 'none';
+      }
+    }
+
+    setupEventListeners() {
+      this.closeButton?.addEventListener('click', () => this.close());
+
+      this.popup?.addEventListener('click', (e) => {
+        const popupContent = this.popup?.querySelector('.relative');
+        if (popupContent && !popupContent.contains(e.target as Node)) {
+          this.close();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !this.popup?.classList.contains('hidden')) {
+          this.close();
+        }
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const popups = document.querySelectorAll('[id$="-popup"]');
+    popups.forEach(popup => {
+      (window as any)[`${popup.id}Manager`] = new PopupManager(popup.id);
+    });
+  });
+</script>

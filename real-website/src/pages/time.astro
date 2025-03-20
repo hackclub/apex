@@ -1,0 +1,517 @@
+---
+import { Image } from "astro:assets";
+import "@fontsource/jersey-25";
+import "@fontsource/jetbrains-mono";
+import "@fontsource/jockey-one";
+
+import orpheusflag from "../assets/orpheusflag.png";
+import orpheusrocket from "../assets/orpheusrocket.png";
+import orpheusmoon from "../assets/orpheusmoon.png";
+import wordmark from "../assets/wordmark.png";
+
+import Step from "../components/Step.astro";
+import Footer from "../components/Footer.astro";
+import Dropdown from "../components/Dropdown.astro";
+import Popup from "../components/Popup.astro";
+
+export const prerender = false;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/logo.png" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+
+        <meta property="og:type" content="website" />
+        <meta name="apple-mobile-web-app-title" content="Apex" />
+        <meta property="og:site_name" content="Apex" />
+        <meta property="og:title" content="Apex" />
+        <meta
+            name="description"
+            property="og:description"
+            content="A 3 month journey to launch projects 100,000 ft into the air on high-altitude balloons in Boston"
+        />
+        <meta property="og:image" content={wordmark.src} />
+
+        <title>Apex</title>
+    </head>
+    <body
+        class="flex items-center justify-center min-h-screen bg-repeat bg-[url('/logo.png')] bg-center bg-repeat"
+    >
+        <Popup id="token-popup">
+            <h2 slot="title">Help, I lost my token!</h2>
+            <div slot="content">
+                Please send a private message to @mpk in the Slack.
+            </div>
+        </Popup>
+        <Popup id="consent-popup">
+            <h2 slot="title">Consent Agreement</h2>
+            <div slot="content">
+                <p>
+                    By consenting, you agree to allow this application to save
+                    your Apex token in your browser's localStorage for 30 days.
+                    This token will be used to authenticate your sessions and
+                    track your progress. No data about your device or personal
+                    information will be sent to the server. You can revoke this
+                    consent at any time by clearing your browser's localStorage.
+                </p>
+                <button
+                    class="bg-green-500 text-white py-2 px-4 rounded-lg mt-4"
+                    onclick="acceptConsent()">I Agree</button
+                >
+                <button
+                    class="bg-red-500 text-white py-2 px-4 rounded-lg mt-4"
+                    onclick="declineConsent()">I Do Not Agree</button
+                >
+            </div>
+        </Popup>
+        <div
+            class="flex flex-col border-[5px] border-black w-[430px] h-[550px] rounded-lg shadow-2xl bg-white"
+        >
+            <h1 class="font-display text-4xl pl-5 pt-5">
+                Apex Time Tracker (v0.2)
+            </h1>
+            <p class="font-mono text-lg pl-5 pt-2 session-time">
+                Time this Session: 00:00:00
+            </p>
+            <p class="font-mono text-lg pl-5 pt-2 total-time">
+                Total Apex Time: 00:00:00
+            </p>
+            <img src="/balloon.png" class="w-[150px] pt-5 mx-auto" />
+            <div
+                class="flex items-center flex-col h-0 invisible main-interface"
+            >
+                <button
+                    class="flex bg-white text-black text-sm border-[2px] border-black border-solid w-[95%] py-1 items-center justify-center rounded-lg"
+                    onclick="startSession()"
+                    id="start-session">Start Session</button
+                >
+                <input
+                    type="text"
+                    class="interface-disable w-[95%] border-[2px] border-black border-solid rounded-lg py-1 mt-2 pl-2 text-sm bg-gray-200"
+                    placeholder="What did you get working?"
+                    id="moment-description"
+                    disabled
+                />
+                <input
+                    type="text"
+                    class="interface-disable w-[95%] border-[2px] border-black border-solid rounded-lg py-1 mt-2 pl-2 text-sm bg-gray-200"
+                    placeholder="Demo CDN link"
+                    id="moment-cdn"
+                    disabled
+                />
+                <div class="flex flex-row w-[95%] mt-2 gap-2">
+                    <button
+                        class="interface-disable flex bg-gray-200 text-black text-sm border-[2px] border-black border-solid w-[95%] py-1 items-center justify-center rounded-lg"
+                        disabled
+                        onclick="pauseSession()"
+                        id="pause-session">Pause Session</button
+                    >
+                    <button
+                        class="interface-disable flex bg-gray-200 text-red-500 text-sm border-[2px] border-black border-solid w-[95%] py-1 items-center justify-center rounded-lg"
+                        disabled
+                        onclick="cancelSession()"
+                        id="cancel-session">Cancel Session</button
+                    >
+                </div>
+            </div>
+            <div class="flex items-center flex-col start-interface">
+                <button
+                    class="flex bg-white text-black text-sm border-[2px] border-black border-solid w-[95%] py-1 items-center justify-center rounded-lg"
+                    onclick="setToken()">Set your Token</button
+                >
+                <button
+                    class="flex bg-white text-black text-sm border-[2px] border-black border-solid w-[95%] py-1 items-center justify-center rounded-lg mt-2"
+                    onclick="tokenLost()">Help, I lost my token!</button
+                >
+                <button
+                    class="flex bg-white text-black text-sm border-[2px] border-black border-solid w-[95%] py-1 items-center justify-center rounded-lg mt-2"
+                    onclick="showConsent()">Consent to saving token</button
+                >
+            </div>
+        </div>
+    </body>
+
+    <script is:inline>
+        let apex_token,
+            current_session_id,
+            start_time,
+            timerInterval,
+            is_paused = false,
+            pausedSeconds;
+        let hasConsent = localStorage.getItem("apexConsent") === "true";
+        let storedToken = hasConsent ? localStorage.getItem("apexToken") : null;
+        function updateSessionTime() {
+            if (start_time) {
+                const elapsed = Math.floor(
+                    (Date.now() - new Date(start_time).getTime()) / 1000,
+                );
+                let adjustedElapsed = elapsed;
+                if (pausedSeconds) {
+                    adjustedElapsed = elapsed - pausedSeconds;
+                }
+                const hours = Math.floor(adjustedElapsed / 3600)
+                    .toString()
+                    .padStart(2, "0");
+                const minutes = Math.floor((adjustedElapsed % 3600) / 60)
+                    .toString()
+                    .padStart(2, "0");
+                const seconds = (adjustedElapsed % 60)
+                    .toString()
+                    .padStart(2, "0");
+                document.querySelector(".session-time").textContent =
+                    `Time this Session: ${hours}:${minutes}:${seconds}`;
+            }
+        }
+        function enableElements() {
+            const disabledElements =
+                document.querySelectorAll(".interface-disable");
+            disabledElements.forEach((element) => {
+                element.disabled = false;
+                element.classList.remove("bg-gray-200");
+                element.classList.add("bg-white");
+            });
+        }
+        function disableElements() {
+            const enabledElements =
+                document.querySelectorAll(".interface-disable");
+            enabledElements.forEach((element) => {
+                element.disabled = true;
+                element.classList.remove("bg-white");
+                element.classList.add("bg-gray-200");
+            });
+        }
+        async function setToken() {
+            const tokenExpires = localStorage.getItem("apexTokenExpires");
+            if (tokenExpires && Date.now() > parseInt(tokenExpires)) {
+                localStorage.removeItem("apexToken");
+                localStorage.removeItem("apexTokenExpires");
+                localStorage.removeItem("apexConsent");
+                storedToken = null;
+                hasConsent = false;
+            }
+            if (storedToken) {
+                apex_token = storedToken;
+                document
+                    .querySelector(".main-interface")
+                    .classList.remove("invisible", "h-0");
+                document
+                    .querySelector(".start-interface")
+                    .classList.add("invisible", "h-0");
+                updateTotalTime();
+            } else {
+                apex_token = prompt("Enter your Apex token:");
+                if (apex_token) {
+                    try {
+                        const response = await fetch("/api/validate-token", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ token: apex_token }),
+                        });
+
+                        if (response.status === 200) {
+                            if (hasConsent) {
+                                localStorage.setItem("apexToken", apex_token);
+                            }
+                            alert("Token is valid and has been set.");
+                            document
+                                .querySelector(".main-interface")
+                                .classList.remove("invisible", "h-0");
+                            document
+                                .querySelector(".start-interface")
+                                .classList.add("invisible", "h-0");
+                            updateTotalTime();
+                        } else if (response.status === 400) {
+                            alert("Token is invalid. Please try again.");
+                            apex_token = null;
+                            localStorage.removeItem("apexToken");
+                            setToken();
+                        } else {
+                            alert(
+                                "An unexpected error occurred. Please try again.",
+                            );
+                            apex_token = null;
+                            localStorage.removeItem("apexToken");
+                            setToken();
+                        }
+                    } catch (error) {
+                        console.error("Error validating token:", error);
+                        alert(
+                            "An error occurred while validating the token. Please try again.",
+                        );
+                        apex_token = null;
+                        localStorage.removeItem("apexToken");
+                        setToken();
+                    }
+                }
+            }
+        }
+        async function startSession() {
+            if (confirm("Are you sure you want to start a session?")) {
+                try {
+                    const response = await fetch("/api/start-time-session", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ token: apex_token }),
+                    });
+
+                    if (response.status === 200) {
+                        enableElements();
+                        document.querySelector("#start-session").textContent =
+                            "End Session";
+                        document
+                            .querySelector("#start-session")
+                            .setAttribute("onclick", "endSession()");
+                        const data = await response.json();
+                        current_session_id = data.sessionId;
+                        start_time = data.startTime;
+                        timerInterval = setInterval(updateSessionTime, 1000);
+                    } else {
+                        alert(
+                            "An unexpected error occurred. Please try again.",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error starting session:", error);
+                    alert(
+                        "An error occurred while starting the session. Please try again.",
+                    );
+                }
+            }
+        }
+        async function pauseSession() {
+            if (current_session_id) {
+                try {
+                    const endpoint = is_paused
+                        ? "/api/resume-time-session"
+                        : "/api/pause-time-session";
+                    const response = await fetch(endpoint, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            token: apex_token,
+                            sessionId: current_session_id,
+                        }),
+                    });
+                    if (response.status === 200) {
+                        const data = await response.json();
+                        is_paused = !is_paused;
+                        document.querySelector("#pause-session").textContent =
+                            is_paused ? "Resume Session" : "Pause Session";
+                        if (is_paused) {
+                            document.querySelector(
+                                ".session-time",
+                            ).textContent += " (Paused)";
+                            clearInterval(timerInterval);
+                        } else {
+                            document.querySelector(
+                                ".session-time",
+                            ).textContent = document
+                                .querySelector(".session-time")
+                                .textContent.replace(" (Paused)", "");
+                            pausedSeconds = data.newPauseTime;
+                            timerInterval = setInterval(
+                                updateSessionTime,
+                                1000,
+                            );
+                        }
+                    } else {
+                        alert(
+                            "An unexpected error occurred. Please try again.",
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error pausing session:", error);
+                    alert(
+                        "An error occurred while pausing the session. Please try again.",
+                    );
+                }
+            }
+        }
+        async function cancelSession() {
+            if (confirm("Are you sure you want to cancel this session?")) {
+                const response = await fetch("/api/cancel-time-session", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        token: apex_token,
+                        sessionId: current_session_id,
+                    }),
+                });
+                if (response.status === 200) {
+                    clearInterval(timerInterval);
+                    document.querySelector(".session-time").textContent =
+                        "Time this Session: 00:00:00";
+                    disableElements();
+                    document.querySelector("#moment-description").value = "";
+                    document.querySelector("#moment-cdn").value = "";
+                    document.querySelector("#start-session").textContent =
+                        "Start Session";
+                    document
+                        .querySelector("#start-session")
+                        .setAttribute("onclick", "startSession()");
+                    current_session_id = null;
+                    start_time = null;
+                    is_paused = false;
+                    pausedSeconds = null;
+                    alert("Session cancelled successfully.");
+                } else {
+                    alert("An unexpected error occurred. Please try again.");
+                }
+            }
+        }
+        async function tokenLost() {
+            const popupManager = window["token-popupManager"];
+            if (popupManager) {
+                popupManager.show();
+            } else {
+                console.error("Popup manager not found");
+            }
+        }
+        async function endSession() {
+            if (current_session_id) {
+                if (confirm("Are you sure you want to end the session?")) {
+                    try {
+                        const momentDescription = document.querySelector(
+                            "#moment-description",
+                        ).value;
+                        const momentCdn =
+                            document.querySelector("#moment-cdn").value;
+                        if (!momentDescription || !momentCdn) {
+                            alert(
+                                "Please fill out the description and CDN link.",
+                            );
+                            return;
+                        }
+                        const response = await fetch("/api/end-time-session", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                token: apex_token,
+                                sessionId: current_session_id,
+                                description: momentDescription,
+                                vidLink: momentCdn,
+                            }),
+                        });
+                        if (response.status === 200) {
+                            clearInterval(timerInterval);
+                            document.querySelector(
+                                ".session-time",
+                            ).textContent = "Time this Session: 00:00:00";
+                            disableElements();
+                            document.querySelector(
+                                "#moment-description",
+                            ).value = "";
+                            document.querySelector("#moment-cdn").value = "";
+                            document.querySelector(
+                                "#start-session",
+                            ).textContent = "Start Session";
+                            document
+                                .querySelector("#start-session")
+                                .setAttribute("onclick", "startSession()");
+                            current_session_id = null;
+                            start_time = null;
+                            is_paused = false;
+                            pausedSeconds = null;
+                            const initialTotalTime =
+                                document.querySelector(
+                                    ".total-time",
+                                ).textContent;
+                            const pollInterval = setInterval(async () => {
+                                await updateTotalTime();
+                                const currentTotalTime =
+                                    document.querySelector(
+                                        ".total-time",
+                                    ).textContent;
+                                if (currentTotalTime !== initialTotalTime) {
+                                    clearInterval(pollInterval);
+                                }
+                            }, 1000);
+                            alert("Session ended successfully.");
+                        } else {
+                            alert(
+                                "An unexpected error occurred. Please try again.",
+                            );
+                        }
+                    } catch (error) {
+                        console.error("Error ending session:", error);
+                        alert(
+                            "An error occurred while ending the session. Please try again.",
+                        );
+                    }
+                }
+            }
+        }
+        async function updateTotalTime() {
+            if (apex_token) {
+                try {
+                    const response = await fetch("/api/retrieve-full-time", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ token: apex_token }),
+                    });
+                    const data = await response.json();
+                    const totalTime = new Date(data.time * 1000)
+                        .toISOString()
+                        .substr(11, 8);
+                    document.querySelector(".total-time").textContent =
+                        `Total Apex Time: ${totalTime}`;
+                } catch (error) {
+                    console.error("Error updating total time:", error);
+                    document.querySelector(".total-time").textContent =
+                        "Total Apex Time: Error";
+                }
+            }
+        }
+        async function showConsent() {
+            const popupManager = window["consent-popupManager"];
+            if (popupManager) {
+                popupManager.show();
+            } else {
+                console.error("Popup manager not found");
+            }
+        }
+        function acceptConsent() {
+            const thirtyDaysFromNow = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getTime();
+            localStorage.setItem("apexConsent", "true");
+            localStorage.setItem("apexTokenExpires", thirtyDaysFromNow.toString());
+            hasConsent = true;
+            if (apex_token) {
+                localStorage.setItem("apexToken", apex_token);
+            }
+            const popupManager = window["consent-popupManager"];
+            if (popupManager) {
+                popupManager.close();
+            }
+            alert("Consent saved. Your token will be remembered for 30 days.");
+        }       
+
+        function declineConsent() {
+            localStorage.removeItem("apexConsent");
+            localStorage.removeItem("apexToken");
+            hasConsent = false;
+            const popupManager = window["consent-popupManager"];
+            if (popupManager) {
+                popupManager.close();
+            }
+            alert("Consent declined. Your token will not be saved.");
+        }
+        if (storedToken) {
+            setToken();
+        }
+    </script>
+</html>
