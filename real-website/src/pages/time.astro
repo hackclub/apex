@@ -4,14 +4,8 @@ import "@fontsource/jersey-25";
 import "@fontsource/jetbrains-mono";
 import "@fontsource/jockey-one";
 
-import orpheusflag from "../assets/orpheusflag.png";
-import orpheusrocket from "../assets/orpheusrocket.png";
-import orpheusmoon from "../assets/orpheusmoon.png";
 import wordmark from "../assets/wordmark.png";
 
-import Step from "../components/Step.astro";
-import Footer from "../components/Footer.astro";
-import Dropdown from "../components/Dropdown.astro";
 import Popup from "../components/Popup.astro";
 
 export const prerender = false;
@@ -38,7 +32,7 @@ export const prerender = false;
         <title>Apex</title>
     </head>
     <body
-        class="flex items-center justify-center min-h-screen bg-repeat bg-[url('/logo.png')] bg-center bg-repeat"
+        class="flex items-center justify-center h-screen bg-gradient-to-b from-[#1983CA] via-[#76C8FF] to-[#E1F3FF] overflow-hidden inset-0"
     >
         <Popup id="token-popup">
             <h2 slot="title">Help, I lost my token!</h2>
@@ -68,7 +62,7 @@ export const prerender = false;
             </div>
         </Popup>
         <div
-            class="flex flex-col border-[5px] border-black w-[430px] h-[550px] rounded-lg shadow-2xl bg-white"
+            class="flex flex-col border-[5px] border-black w-[430px] h-[550px] rounded-lg shadow-2xl bg-white z-10"
         >
             <h1 class="font-display text-4xl pl-5 pt-5">
                 Apex Time Tracker (v0.2)
@@ -131,8 +125,58 @@ export const prerender = false;
                     onclick="showConsent()">Consent to saving token</button
                 >
             </div>
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[5%] top-[15%] w-[100px] z-[-1]"
+            />
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[90%] top-[30%] w-[100px] z-[-1]"
+            />
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[20%] top-[30%] w-[100px] z-[-1]"
+            />
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[75%] top-[10%] w-[100px] z-[-1]"
+            />
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[10%] top-[60%] w-[100px] z-[-1]"
+            />
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[75%] top-[75%] w-[100px] z-[-1]"
+            />
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[22%] top-[85%] w-[100px] z-[-1]"
+            />
+            <img
+                src="/cloud.png"
+                class="cloud absolute left-[70%] top-[45%] w-[100px] z-[-1]"
+            />
         </div>
     </body>
+
+    <style>
+        @keyframes float {
+          0% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-30px);
+          }
+          100% {
+            transform: translateY(0px);
+          }
+        }
+  
+        .cloud {
+          animation: float 4s ease-in-out infinite;
+        }
+    </style>
 
     <script is:inline>
         let apex_token,

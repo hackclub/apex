@@ -17,3 +17,6 @@ The Apex website is built using Astro and Tailwind CSS. These are both great
 choices for the Apex website since we don't have any interactivity, and the Apex
 Resources wiki is very content-heavy. Astro makes is super easy to organize
 this, and Tailwind CSS makes it super easy to style.
+
+In addition, this website also features a variety of API endpoints for time-tracking. These 
+interface with both the time tracking application, and the [web-based time tracker](https://apex.hackclub.com/time).
