@@ -499,28 +499,34 @@ export const prerender = false;
             }
         }
         async function updateTotalTime() {
-            if (apex_token) {
-                try {
-                    const response = await fetch("/api/retrieve-full-time", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ token: apex_token }),
-                    });
-                    const data = await response.json();
-                    const totalTime = new Date(data.time * 1000)
-                        .toISOString()
-                        .substr(11, 8);
-                    document.querySelector(".total-time").textContent =
-                        `Total Apex Time: ${totalTime}`;
-                } catch (error) {
-                    console.error("Error updating total time:", error);
-                    document.querySelector(".total-time").textContent =
-                        "Total Apex Time: Error";
-                }
-            }
+    if (apex_token) {
+        try {
+            const response = await fetch("/api/retrieve-full-time", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ token: apex_token }),
+            });
+            const data = await response.json();
+            const hours = Math.floor(data.time / 3600)
+                .toString()
+                .padStart(2, "0");
+            const minutes = Math.floor((data.time % 3600) / 60)
+                .toString()
+                .padStart(2, "0");
+            const seconds = Math.round(data.time % 60)
+                .toString()
+                .padStart(2, "0");
+            document.querySelector(".total-time").textContent =
+                `Total Apex Time: ${hours}:${minutes}:${seconds}`;
+        } catch (error) {
+            console.error("Error updating total time:", error);
+            document.querySelector(".total-time").textContent =
+                "Total Apex Time: Error";
         }
+    }
+}
         async function showConsent() {
             const popupManager = window["consent-popupManager"];
             if (popupManager) {
