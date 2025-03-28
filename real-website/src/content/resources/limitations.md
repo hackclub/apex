@@ -10,9 +10,8 @@ these limitations.
   - Check with the Apex team in the [#apex](/slack-channel) channel to clear your enclosure!  
   - Approval is required before using your box of choice.  
   - Pre-approved boxes:  
-    - [https://www.amazon.com/Robin-II-Cooler-Outside-Dimensions/dp/B0CK58Y4DH/ref=sr\_1\_1\_sspa?sr=8-1-spons\&sp\_csd=d2lkZ2V0TmFtZT1zcF9hdGY](https://www.amazon.com/Robin-II-Cooler-Outside-Dimensions/dp/B0CK58Y4DH/ref=sr_1_1_sspa?sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY)  
-    - [https://www.amazon.com/ON17F-Thermo-Chill-Overnite-Containers/dp/B00UZBCTK8/ref=sr\_1\_7?sr=8-7](https://www.amazon.com/ON17F-Thermo-Chill-Overnite-Containers/dp/B00UZBCTK8/ref=sr_1_7?sr=8-7)  
-    - [https://www.amazon.com/BOX-USA-B214C-Insulated-Shipping/dp/B01D2788UG?ref\_=ast\_sto\_dp](https://www.amazon.com/BOX-USA-B214C-Insulated-Shipping/dp/B01D2788UG?ref_=ast_sto_dp)
+    - [https://www.amazon.com/ON17F-Thermo-Chill-Overnite-Containers/dp/B00UZBCTK8/ref=sr\_1\_7?sr=8-7](https://www.amazon.com/ON17F-Thermo-Chill-Overnite-Containers/dp/B00UZBCTK8/ref=sr_1_7?sr=8-7)
+    - [https://www.amazon.com/Polar-Tech-207C-Insulated-Shipper/dp/B007ICA67U](https://www.amazon.com/Polar-Tech-207C-Insulated-Shipper/dp/B007ICA67U)
 - Passes all tests  
 - Does not interfere with the payload train  
   - Does not twist the cord  
