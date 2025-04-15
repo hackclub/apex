@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { undefined } from "astro:schema";
 import "@fontsource/jersey-25";
 import "@fontsource/jetbrains-mono";
 import "@fontsource/jockey-one";
@@ -61,8 +62,20 @@ export const prerender = false;
                 >
             </div>
         </Popup>
+        <Popup id="session-popup">
+            <h2 slot="title">View your Sessions</h2>
+            <div slot="content">
+                <div
+                    class="grid grid-cols-8 gap-4 max-h-96 overflow-y-auto"
+                    id="grid-container"
+                >
+                    <!-- Content will be dynamically injected by the script -->
+                </div>
+            </div>
+        </Popup>
+
         <div
-            class="flex flex-col border-[5px] border-black w-[430px] h-[550px] rounded-lg shadow-2xl bg-white z-10"
+            class="flex flex-col border-[5px] border-black w-[430px] h-[600px] rounded-lg shadow-2xl bg-white z-10"
         >
             <h1 class="font-display text-4xl pl-5 pt-5">
                 Apex Time Tracker (v0.2)
@@ -73,6 +86,10 @@ export const prerender = false;
             <p class="font-mono text-lg pl-5 pt-2 total-time">
                 Total Apex Time: 00:00:00
             </p>
+            <a
+                class="pl-5 pt-2 underline cursor-pointer"
+                onclick="showSession()">View your sessions</a
+            >
             <img src="/balloon.png" class="w-[150px] pt-5 mx-auto" />
             <div
                 class="flex items-center flex-col h-0 invisible main-interface"
@@ -162,19 +179,19 @@ export const prerender = false;
 
     <style>
         @keyframes float {
-          0% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-30px);
-          }
-          100% {
-            transform: translateY(0px);
-          }
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
         }
-  
+
         .cloud {
-          animation: float 4s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite;
         }
     </style>
 
@@ -294,6 +311,7 @@ export const prerender = false;
                 }
             }
         }
+
         async function startSession() {
             if (confirm("Are you sure you want to start a session?")) {
                 try {
@@ -499,34 +517,42 @@ export const prerender = false;
             }
         }
         async function updateTotalTime() {
-    if (apex_token) {
-        try {
-            const response = await fetch("/api/retrieve-full-time", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ token: apex_token }),
-            });
-            const data = await response.json();
-            const hours = Math.floor(data.time / 3600)
-                .toString()
-                .padStart(2, "0");
-            const minutes = Math.floor((data.time % 3600) / 60)
-                .toString()
-                .padStart(2, "0");
-            const seconds = Math.round(data.time % 60)
-                .toString()
-                .padStart(2, "0");
-            document.querySelector(".total-time").textContent =
-                `Total Apex Time: ${hours}:${minutes}:${seconds}`;
-        } catch (error) {
-            console.error("Error updating total time:", error);
-            document.querySelector(".total-time").textContent =
-                "Total Apex Time: Error";
+            if (apex_token) {
+                try {
+                    const response = await fetch("/api/retrieve-full-time", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ token: apex_token }),
+                    });
+                    const data = await response.json();
+                    const hours = Math.floor(data.time / 3600)
+                        .toString()
+                        .padStart(2, "0");
+                    const minutes = Math.floor((data.time % 3600) / 60)
+                        .toString()
+                        .padStart(2, "0");
+                    const seconds = Math.round(data.time % 60)
+                        .toString()
+                        .padStart(2, "0");
+                    document.querySelector(".total-time").textContent =
+                        `Total Apex Time: ${hours}:${minutes}:${seconds}`;
+                } catch (error) {
+                    console.error("Error updating total time:", error);
+                    document.querySelector(".total-time").textContent =
+                        "Total Apex Time: Error";
+                }
+            }
         }
-    }
-}
+        async function showSession() {
+            const popupManager = window["session-popupManager"];
+            if (popupManager) {
+                popupManager.show();
+            } else {
+                console.error("Popup manager not found");
+            }
+        }
         async function showConsent() {
             const popupManager = window["consent-popupManager"];
             if (popupManager) {
@@ -536,9 +562,14 @@ export const prerender = false;
             }
         }
         function acceptConsent() {
-            const thirtyDaysFromNow = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).getTime();
+            const thirtyDaysFromNow = new Date(
+                Date.now() + 30 * 24 * 60 * 60 * 1000,
+            ).getTime();
             localStorage.setItem("apexConsent", "true");
-            localStorage.setItem("apexTokenExpires", thirtyDaysFromNow.toString());
+            localStorage.setItem(
+                "apexTokenExpires",
+                thirtyDaysFromNow.toString(),
+            );
             hasConsent = true;
             if (apex_token) {
                 localStorage.setItem("apexToken", apex_token);
@@ -548,7 +579,7 @@ export const prerender = false;
                 popupManager.close();
             }
             alert("Consent saved. Your token will be remembered for 30 days.");
-        }       
+        }
 
         function declineConsent() {
             localStorage.removeItem("apexConsent");
@@ -563,5 +594,140 @@ export const prerender = false;
         if (storedToken) {
             setToken();
         }
+
+        async function retrieveSessions() {
+            try {
+                const response = await fetch("/api/retrieve-sessions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token: apex_token }),
+                });
+                if (response.status === 200) {
+                    const data = await response.json();
+                    const completedSessions = {
+                        trimmedSessionRecords: data.trimmedSessionRecords.filter(
+                            (session) => session.fields["endTime"],
+                        ),
+                    }
+                    return completedSessions.trimmedSessionRecords;
+                } else {
+                    alert(
+                        "An unexpected error occurred while retrieving sessions. Please try again.",
+                    );
+                }
+            } catch (error) {
+                console.error("Error retrieving sessions:", error);
+                alert(
+                    "An error occurred while retrieving sessions. Please try again.",
+                );
+            }
+        }
+
+        async function checkForExistingSession() {
+            try {
+                const response = await fetch("/api/retrieve-sessions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ token: apex_token }),
+                });
+                if (response.status === 200) {
+                    const data = await response.json();
+                    const completedSessions = {
+                        trimmedSessionRecords: data.trimmedSessionRecords.filter(
+                            (session) => session.fields["endTime"],
+                        ),
+                    };
+                    console.log(completedSessions);
+                    return completedSessions.trimmedSessionRecords.length > 0;
+                } else {
+                    alert(
+                        "An unexpected error occurred while checking for existing sessions. Please try again.",
+                    );
+                }
+            } catch (error) {
+                console.error("Error checking for existing sessions:", error);
+                alert(
+                    "An error occurred while checking for existing sessions. Please try again.",
+                );
+            }
+        }
+
+        async function renderGridItems() {
+            const container = document.getElementById("grid-container");
+            if (!container) return;
+
+            const sessions = await retrieveSessions();
+            if (!sessions) return;
+
+            container.innerHTML = "";
+
+            sessions.forEach((session) => {
+                const { reviewedStatus } = session.fields;
+
+                let bgColorClass = "bg-yellow-200";
+
+                if (reviewedStatus === "Approved") {
+                    bgColorClass = "bg-green-200";
+                } else if (reviewedStatus === "Not Approved") {
+                    bgColorClass = "bg-red-200";
+                }
+
+                const div = document.createElement("div");
+                div.className = `${bgColorClass} rounded-lg p-4 text-center hover:bg-opacity-75 cursor-pointer`;
+                let sessionDuration = calculateSessionDuration(
+                    session.fields["startTime"],
+                    session.fields["endTime"],
+                    session.fields["pauseTimeStart"],
+                    session.fields["totalPauseTime"],
+                );
+                div.addEventListener("click", () => {
+                    const sessionId = session.fields["ID"];
+                    const description = session.fields["Moment"];
+                    const cdnLink = session.fields["Video"];
+                    alert(
+                        `Status: ${reviewedStatus === undefined ? "Pending Review" : reviewedStatus}\nSession ID: ${sessionId}\nDescription: ${description}\nCDN Link: ${cdnLink}\nSession Duration: ${Math.floor(
+                            sessionDuration / 3600,
+                        )}:${Math.floor((sessionDuration % 3600) / 60)
+                            .toString()
+                            .padStart(2, "0")}:${Math.round(sessionDuration % 60)
+                            .toString()
+                            .padStart(2, "0")}`,
+                    );
+                });
+
+                container.appendChild(div);
+            });
+        }
+        function calculateSessionDuration(startTime, endTime, pauseTimeStart, totalPauseTime) {
+            startTime = startTime.trim();
+            endTime = endTime.trim();
+            pauseTimeStart = pauseTimeStart ? pauseTimeStart.trim() : null;
+            totalPauseTime = totalPauseTime ? parseInt(totalPauseTime) : 0;
+            let start = new Date(startTime);
+            let end = new Date(endTime);
+            let pauseStart = pauseTimeStart ? new Date(pauseTimeStart) : null;
+
+            // Calculate session duration in seconds
+            let sessionDuration = (end - start) / 1000;
+
+            // Handle case where session is still paused
+            if (pauseStart && totalPauseTime === 0) {
+                let pauseDuration = (end - pauseStart) / 1000;
+                sessionDuration -= pauseDuration;
+            }
+
+            // Subtract total pause time if it exists
+            sessionDuration -= totalPauseTime;
+
+            // Ensure sessionDuration is not negative
+            sessionDuration = Math.max(0, sessionDuration);
+
+            return sessionDuration;
+        }
+        document.addEventListener("DOMContentLoaded", renderGridItems);
     </script>
 </html>

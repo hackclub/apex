@@ -15,7 +15,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
     try {
         const { token } = await request.json();
-        console.log(token);
 
         const timeRecords = await base('Cumulative').select({
             filterByFormula: `{Token} = '${token}'`,
