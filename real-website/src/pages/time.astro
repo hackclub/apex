@@ -285,7 +285,6 @@ export const prerender = false;
                                 .querySelector(".start-interface")
                                 .classList.add("invisible", "h-0");
                             updateTotalTime();
-                            renderGridItems();
                         } else if (response.status === 400) {
                             alert("Token is invalid. Please try again.");
                             apex_token = null;
@@ -549,6 +548,7 @@ export const prerender = false;
             const popupManager = window["session-popupManager"];
             if (popupManager) {
                 popupManager.show();
+                renderGridItems();
             } else {
                 console.error("Popup manager not found");
             }
@@ -743,11 +743,11 @@ export const prerender = false;
         window.addEventListener('beforeunload', function (e) {
           // Standard message (some browsers may ignore the custom message)
           const message = 'Changes you made may not be saved.';
-                
+
           // Set the returnValue property for cross-browser support
           e.preventDefault(); // Required for Chrome
           e.returnValue = message; // Required for modern browsers
-                
+
           return message; // Required for some older browsers
         });
 
