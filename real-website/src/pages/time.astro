@@ -285,6 +285,7 @@ export const prerender = false;
                                 .querySelector(".start-interface")
                                 .classList.add("invisible", "h-0");
                             updateTotalTime();
+                            renderGridItems();
                         } else if (response.status === 400) {
                             alert("Token is invalid. Please try again.");
                             apex_token = null;
@@ -606,10 +607,11 @@ export const prerender = false;
                 if (response.status === 200) {
                     const data = await response.json();
                     const completedSessions = {
-                        trimmedSessionRecords: data.trimmedSessionRecords.filter(
-                            (session) => session.fields["endTime"],
-                        ),
-                    }
+                        trimmedSessionRecords:
+                            data.trimmedSessionRecords.filter(
+                                (session) => session.fields["endTime"],
+                            ),
+                    };
                     return completedSessions.trimmedSessionRecords;
                 } else {
                     alert(
@@ -624,7 +626,7 @@ export const prerender = false;
             }
         }
 
-        async function checkForExistingSession() {
+        /* async function checkForExistingSession() {
             try {
                 const response = await fetch("/api/retrieve-sessions", {
                     method: "POST",
@@ -636,9 +638,10 @@ export const prerender = false;
                 if (response.status === 200) {
                     const data = await response.json();
                     const completedSessions = {
-                        trimmedSessionRecords: data.trimmedSessionRecords.filter(
-                            (session) => session.fields["endTime"],
-                        ),
+                        trimmedSessionRecords:
+                            data.trimmedSessionRecords.filter(
+                                (session) => session.fields["endTime"],
+                            ),
                     };
                     console.log(completedSessions);
                     return completedSessions.trimmedSessionRecords.length > 0;
@@ -653,55 +656,64 @@ export const prerender = false;
                     "An error occurred while checking for existing sessions. Please try again.",
                 );
             }
-        }
+        } */
 
         async function renderGridItems() {
-            const container = document.getElementById("grid-container");
-            if (!container) return;
+            if (apex_token) {
+                const container = document.getElementById("grid-container");
+                if (!container) return;
 
-            const sessions = await retrieveSessions();
-            if (!sessions) return;
+                const sessions = await retrieveSessions();
+                if (!sessions) return;
 
-            container.innerHTML = "";
+                container.innerHTML = "";
 
-            sessions.forEach((session) => {
-                const { reviewedStatus } = session.fields;
+                sessions.forEach((session) => {
+                    const { reviewedStatus } = session.fields;
 
-                let bgColorClass = "bg-yellow-200";
+                    let bgColorClass = "bg-yellow-200";
 
-                if (reviewedStatus === "Approved") {
-                    bgColorClass = "bg-green-200";
-                } else if (reviewedStatus === "Not Approved") {
-                    bgColorClass = "bg-red-200";
-                }
+                    if (reviewedStatus === "Approved") {
+                        bgColorClass = "bg-green-200";
+                    } else if (reviewedStatus === "Not Approved") {
+                        bgColorClass = "bg-red-200";
+                    }
 
-                const div = document.createElement("div");
-                div.className = `${bgColorClass} rounded-lg p-4 text-center hover:bg-opacity-75 cursor-pointer`;
-                let sessionDuration = calculateSessionDuration(
-                    session.fields["startTime"],
-                    session.fields["endTime"],
-                    session.fields["pauseTimeStart"],
-                    session.fields["totalPauseTime"],
-                );
-                div.addEventListener("click", () => {
-                    const sessionId = session.fields["ID"];
-                    const description = session.fields["Moment"];
-                    const cdnLink = session.fields["Video"];
-                    alert(
-                        `Status: ${reviewedStatus === undefined ? "Pending Review" : reviewedStatus}\nSession ID: ${sessionId}\nDescription: ${description}\nCDN Link: ${cdnLink}\nSession Duration: ${Math.floor(
-                            sessionDuration / 3600,
-                        )}:${Math.floor((sessionDuration % 3600) / 60)
-                            .toString()
-                            .padStart(2, "0")}:${Math.round(sessionDuration % 60)
-                            .toString()
-                            .padStart(2, "0")}`,
+                    const div = document.createElement("div");
+                    div.className = `${bgColorClass} rounded-lg p-4 text-center hover:bg-opacity-75 cursor-pointer`;
+                    let sessionDuration = calculateSessionDuration(
+                        session.fields["startTime"],
+                        session.fields["endTime"],
+                        session.fields["pauseTimeStart"],
+                        session.fields["totalPauseTime"],
                     );
-                });
+                    div.addEventListener("click", () => {
+                        const sessionId = session.fields["ID"];
+                        const description = session.fields["Moment"];
+                        const cdnLink = session.fields["Video"];
+                        alert(
+                            `Status: ${reviewedStatus === undefined ? "Pending Review" : reviewedStatus}\nSession ID: ${sessionId}\nDescription: ${description}\nCDN Link: ${cdnLink}\nSession Duration: ${Math.floor(
+                                sessionDuration / 3600,
+                            )}:${Math.floor((sessionDuration % 3600) / 60)
+                                .toString()
+                                .padStart(2, "0")}:${Math.round(
+                                sessionDuration % 60,
+                            )
+                                .toString()
+                                .padStart(2, "0")}`,
+                        );
+                    });
 
-                container.appendChild(div);
-            });
+                    container.appendChild(div);
+                });
+            }
         }
-        function calculateSessionDuration(startTime, endTime, pauseTimeStart, totalPauseTime) {
+        function calculateSessionDuration(
+            startTime,
+            endTime,
+            pauseTimeStart,
+            totalPauseTime,
+        ) {
             startTime = startTime.trim();
             endTime = endTime.trim();
             pauseTimeStart = pauseTimeStart ? pauseTimeStart.trim() : null;
@@ -727,6 +739,17 @@ export const prerender = false;
 
             return sessionDuration;
         }
-        document.addEventListener("DOMContentLoaded", renderGridItems);
+
+        window.addEventListener('beforeunload', function (e) {
+          // Standard message (some browsers may ignore the custom message)
+          const message = 'Changes you made may not be saved.';
+                
+          // Set the returnValue property for cross-browser support
+          e.preventDefault(); // Required for Chrome
+          e.returnValue = message; // Required for modern browsers
+                
+          return message; // Required for some older browsers
+        });
+
     </script>
 </html>
