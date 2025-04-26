@@ -17,7 +17,7 @@ If you already have a team, that's great! Make sure everyone
 comes time to submit a proposal, make sure to include everyone's names.
 
 If you don't already have a team (or would like more members), that's also
-great! Talk around in the [#apex](https://apex.hackclub.com/slack-channel) channel
+great! Talk around in the [#apex](https://apex.hackclub.com/slack-apex) channel
 on the Hack Club Slack, and you'll find someone cool to work with on your Apex
 project :)
 
@@ -53,7 +53,7 @@ a couple ideas are simply too impractical (take a look at the
 concept slightly to make it better, or you might just have to scrap it. Other
 ideas might sound good, but you have no idea how to make it happen. Don't worry!
 _\<insert your favorite search engine here\>_ and the
-[#apex](https://apex.hackclub.com/slack-channel) channel on Slack are your best
+[#apex](https://apex.hackclub.com/slack-apex) channel on Slack are your best
 friends, and at least one of them will be able to point you in the right
 direction.
 

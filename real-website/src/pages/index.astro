@@ -132,11 +132,10 @@ import Dropdown from "../components/Dropdown.astro";
         <h1 class="w-1/2 text-2xl">General questions</h1>
 
         <Dropdown question="What's a hackathon?">
-          A hackathon is a 12-48 hour event where groups of people can get
-          together and create! Don't worry, we're not doing any computer
-          hacking. This hackathon is a bit unorthodox - it's a 3 month long
-          journey, culminating in the traditional 48 hour event, but with some
-          twists.
+          A hackathon is an event where groups of people can get together and
+          create! Don't worry, we're not doing any computer hacking. This
+          hackathon is a bit unorthodox - it's a 3 month long journey,
+          culminating in a 3 day event, but with some twists.
         </Dropdown>
 
         <Dropdown question="Who's this for?">
@@ -155,11 +154,12 @@ import Dropdown from "../components/Dropdown.astro";
           Nope! Apex is open to all teenagers interested in launching projects
           on high altitude balloons. We will provide lots of resources to help
           you along the way of creating your project, in addition to weekly
-          working calls to refine your idea and help you build.
+          working calls (fridays at 8pm est) to refine your idea and help you
+          build.
         </Dropdown>
 
         <Dropdown question="Do I need a team?">
-          Yes, you need a team of 3-4 people. This is because we have limited
+          Yes, you need a team of 2-4 people. This is because we have limited
           space on the balloon, and we want to make sure everyone gets a chance
           to launch their project. If you don't have a team, don't worry! We'll
           help you find one.
@@ -207,13 +207,15 @@ import Dropdown from "../components/Dropdown.astro";
         </Dropdown>
 
         <Dropdown question="Is there an online community for this?">
-          There sure is! We have a channel on the Hack Club Slack called #apex.
-          Join <a
+          There sure is! We have a channel on the Hack Club Slack called <a
+            href="/slack-apex">#apex</a
+          >. Join <a
             class="underline"
             href="https://hackclub.com/slack/?event=Apex"
             target="_blank">here</a
           >! We provide support here and post important updates in
-          #apex-bulletin. For that reason, membership is mandatory!
+          <a href="/slack-apex-bulletin">#apex-bulletin</a>. For that reason,
+          membership is mandatory!
         </Dropdown>
 
         <h1 class="mt-10 w-1/2 text-2xl">Logistics</h1>
@@ -226,22 +228,25 @@ import Dropdown from "../components/Dropdown.astro";
           <br />
           2. Track your time spent working on your project.
           <br />
-          3. Reach 100 hours of work to qualify for the event and get flight stipends.
+          3. Reach 30 hours of work to qualify for the event and unlock your project
+          budget.
           <br />
-          4. Head to Boston for the event!
+          4. Reach 100 hours of work and earn your flight stipends (optional).
           <br />
-          5. We'll help you launch your project on a high altitude balloon, which
+          5. Head to Boston for the event!
+          <br />
+          6. We'll help you launch your project on a high altitude balloon, which
           will ascend to 100,000 feet.
           <br />
-          6. Recover your project and analyze the data.
+          7. Recover your project and analyze the data.
           <br />
-          7. Celebrate!
+          8. Celebrate!
         </Dropdown>
 
         <Dropdown question="Where and when is this happening?">
-          The main event will hopefully be hosted at the WPS Institute, in
-          Newton, MA, just outside of Boston. The event will take place from
-          June 20-22, 2025. See a full schedule <a
+          The main event will be hosted at the WPS Institute, in Newton, MA,
+          just outside of Boston. The event will take place from June 20-22,
+          2025. See a full schedule <a
             class="underline"
             href="/resources/launch">here</a
           >!
@@ -254,11 +259,9 @@ import Dropdown from "../components/Dropdown.astro";
         </Dropdown>
 
         <Dropdown question="Hold up, how do I track my time?">
-          Great question! We're still working on the tool (expected by early
-          March!), but it will record your screen while you work on your
-          project. If you're working on something physical, you can set up your
-          phone or other device to record yourself working. This way, we can
-          verify that you're actually working on your project.
+          Great question! Use the intuitive time tracker available in the <a
+            href="/slack-apex">#apex</a
+          > channel.
         </Dropdown>
 
         <Dropdown question="Is there a project budget?">
@@ -286,9 +289,9 @@ import Dropdown from "../components/Dropdown.astro";
         <Dropdown question="What if I get stuck and need help?">
           If you get stuck, don't worry! We have a team of mentors who are here
           to help you. They're all experienced makers and are here to help you
-          with any problems you might have. We'll also have weekly or bi-weekly
-          working calls where you can pop in, ask questions, and receive help,
-          in addition to our monthly mandatory 1:1 teams check-ins.
+          with any problems you might have. We'll also have weekly working calls
+          on Friday nights at 8pm EST where you can pop in, ask questions, and
+          receive help.
         </Dropdown>
 
         <h1 class="mt-10 w-1/2 text-2xl">Technical questions</h1>
@@ -316,10 +319,8 @@ import Dropdown from "../components/Dropdown.astro";
           Participants will first arrive and finalize their projects before we
           drive out as a group to the launch site. Projects are attached to a
           weather balloon, ascend to the stratosphere, and then descend via
-          parachute. Different teams will go out to track and recover their
-          projects before analyzing the data. Be prepared for some hiking
-          through the woods! Next, we will analyze the collected data before
-          finally presenting it to the hackathon. There will also be an awesome
+          parachute. Next, we will analyze the collected data before finally
+          presenting it to the hackathon. There will also be an awesome
           post-launch celebration and a watch party of the video cams.
         </Dropdown>
 
@@ -348,7 +349,8 @@ import Dropdown from "../components/Dropdown.astro";
           If you have any more questions, feel free to reach out to us at
           <a class="underline" href="mailto:@apex@hackclub.com"
             >apex@hackclub.com</a
-          >, or drop a question in the #apex channel of <a
+          >, or drop a question in the <a href="/slack-apex">#apex</a> channel of
+          <a
             class="underline"
             href="https://hackclub.com/slack/?event=Apex"
             target="_blank">the Hack Club Slack!</a
