@@ -15,7 +15,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
     try {
         const { token } = await request.json();
-        console.log(token);
 
         const signupRecords = await base('Signups').select({
             filterByFormula: `{Token} = '${token}'`,
@@ -30,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
         const signupFields = signupRecord.fields['First name'];
 
         const sessionRecords = await base('Sessions').select({
-            filterByFormula: `{Signups} = '${signupFields}'`,
+            filterByFormula: `{Lookup} = '${token}'`,
             maxRecords: 1000,
             sort: [{ field: 'startTime', direction: 'asc' }] // Sorting sessions by StartTime in ascending order
         }).firstPage();
