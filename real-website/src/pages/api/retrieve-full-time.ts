@@ -25,7 +25,7 @@ export const POST: APIRoute = async ({ request }) => {
           return new Response(JSON.stringify({ time:0 }), {status: 400});
         }
 
-        const timeRecord = timeRecords[0]['fields']['Seconds'];
+        const timeRecord = timeRecords[0]['fields']['Approved Time'];
 
         return new Response(JSON.stringify({ time:timeRecord }), {status: 200});
     } catch (error) {
