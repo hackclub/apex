@@ -526,13 +526,14 @@ export const prerender = false;
                         body: JSON.stringify({ token: apex_token }),
                     });
                     const data = await response.json();
-                    const hours = Math.floor(data.time / 3600)
+                    const totalTime = data.time || 0; // Default to 0 if no time is provided
+                    const hours = Math.floor(totalTime / 3600)
                         .toString()
                         .padStart(2, "0");
-                    const minutes = Math.floor((data.time % 3600) / 60)
+                    const minutes = Math.floor((totalTime % 3600) / 60)
                         .toString()
                         .padStart(2, "0");
-                    const seconds = Math.round(data.time % 60)
+                    const seconds = Math.round(totalTime % 60)
                         .toString()
                         .padStart(2, "0");
                     document.querySelector(".total-time").textContent =
