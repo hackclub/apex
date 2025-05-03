@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
     try {
         const { token } = await request.json();
 
-        const timeRecords = await base('Cumulative').select({
+        const timeRecords = await base('Signups').select({
             filterByFormula: `{Token} = '${token}'`,
             maxRecords: 1
         }).firstPage();
@@ -25,9 +25,10 @@ export const POST: APIRoute = async ({ request }) => {
           return new Response(JSON.stringify({ time:0 }), {status: 400});
         }
 
-        const timeRecord = timeRecords[0]['fields']['Approved Time'];
+        const timeRecord = timeRecords[0]['fields']['Approved Seconds'] || 0;
+        const totalTimeRecord = timeRecords[0]['fields']['Total Seconds'] || 0;
 
-        return new Response(JSON.stringify({ time:timeRecord }), {status: 200});
+        return new Response(JSON.stringify({ time:timeRecord, totaltime:totalTimeRecord }), {status: 200});
     } catch (error) {
         console.error('Error retrieving time:', error);
         return new Response(JSON.stringify("Error retrieving time."), {status: 500});

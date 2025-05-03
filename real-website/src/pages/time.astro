@@ -537,11 +537,11 @@ export const prerender = false;
                         .toString()
                         .padStart(2, "0");
                     document.querySelector(".total-time").textContent =
-                        `Total Apex Time: ${hours}:${minutes}:${seconds}`;
+                        `Total Approved Apex Time: ${hours}:${minutes}:${seconds}`;
                 } catch (error) {
                     console.error("Error updating total time:", error);
                     document.querySelector(".total-time").textContent =
-                        "Total Apex Time: Error";
+                        "Total Approved Apex Time: Error";
                 }
             }
         }
