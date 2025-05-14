@@ -48,7 +48,8 @@ export const POST: APIRoute = async ({ request }) => {
                 totalTime: record.fields["Total Time"],
                 reviewedStatus: record.fields.reviewedStatus,
                 moment: record.fields["Moment"],
-                video: record.fields["Video"]
+                video: record.fields["Video"],
+                notes: record.fields.rejectReason
             };
         });
 

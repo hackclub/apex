@@ -688,6 +688,7 @@ export const prerender = false;
                         const sessionId = session["ID"];
                         const description = session.moment;
                         const cdnLink = session.video;
+                        const notes = session.notes;
                         alert(
                             `Status: ${reviewedStatus === undefined ? "Pending Review" : reviewedStatus}\nSession ID: ${sessionId}\nDescription: ${description}\nCDN Link: ${cdnLink}\nSession Duration: ${Math.floor(
                                 sessionDuration / 3600,
@@ -697,7 +698,7 @@ export const prerender = false;
                                 sessionDuration % 60,
                             )
                                 .toString()
-                                .padStart(2, "0")}`,
+                                .padStart(2, "0")}${notes !== undefined ? `\nNotes: ${notes}` : ""}`,
                         );
                     });
 
