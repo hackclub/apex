@@ -36,13 +36,19 @@ export const POST: APIRoute = async ({ request }) => {
 
         // Filter out sessions that have 'isCancelled' set to true
         const filteredSessionRecords = sessionRecords.filter(record => {
-            return record.fields.isCancelled !== true;  // Exclude sessions where 'isCancelled' is true
+            return record.fields.isCancelled !== true && record.fields.endTime !== undefined;  // Exclude sessions where 'isCancelled' is true or 'endTime' is blank
         });
 
         // Trim the sessionRecords to only include the fields key (index -> fields)
         const trimmedSessionRecords = filteredSessionRecords.map(record => {
             return {
-                fields: record.fields
+                ID: record.fields["ID"],
+                startTime: record.fields.startTime,
+                endTime: record.fields["endTime"],
+                totalTime: record.fields["Total Time"],
+                reviewedStatus: record.fields.reviewedStatus,
+                moment: record.fields["Moment"],
+                video: record.fields["Video"]
             };
         });
 

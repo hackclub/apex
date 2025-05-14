@@ -607,13 +607,8 @@ export const prerender = false;
                 });
                 if (response.status === 200) {
                     const data = await response.json();
-                    const completedSessions = {
-                        trimmedSessionRecords:
-                            data.trimmedSessionRecords.filter(
-                                (session) => session.fields["endTime"],
-                            ),
-                    };
-                    return completedSessions.trimmedSessionRecords;
+                    console.log(data.trimmedSessionRecords)
+                    return data.trimmedSessionRecords;
                 } else {
                     alert(
                         "An unexpected error occurred while retrieving sessions. Please try again.",
@@ -670,28 +665,29 @@ export const prerender = false;
                 container.innerHTML = "";
 
                 sessions.forEach((session) => {
-                    const { reviewedStatus } = session.fields;
+                    console.log(session);
+                    const reviewedStatus = session["reviewedStatus"];
 
                     let bgColorClass = "bg-yellow-200";
 
-                    if (reviewedStatus === "Approved") {
-                        bgColorClass = "bg-green-200";
-                    } else if (reviewedStatus === "Not Approved") {
+                    if (reviewedStatus === "Not Approved") {
                         bgColorClass = "bg-red-200";
+                    } else if(reviewedStatus.indexOf("Approved") !== -1) {
+                        bgColorClass = "bg-green-200";
                     }
 
                     const div = document.createElement("div");
                     div.className = `${bgColorClass} rounded-lg p-4 text-center hover:bg-opacity-75 cursor-pointer`;
-                    let sessionDuration = session.fields["Total Time"];/* calculateSessionDuration(
+                    let sessionDuration = session.totalTime;/* calculateSessionDuration(
                         session.fields["startTime"],
                         session.fields["endTime"],
                         session.fields["pauseTimeStart"],
                         session.fields["totalPauseTime"],
                     ); */
                     div.addEventListener("click", () => {
-                        const sessionId = session.fields["ID"];
-                        const description = session.fields["Moment"];
-                        const cdnLink = session.fields["Video"];
+                        const sessionId = session["ID"];
+                        const description = session.moment;
+                        const cdnLink = session.video;
                         alert(
                             `Status: ${reviewedStatus === undefined ? "Pending Review" : reviewedStatus}\nSession ID: ${sessionId}\nDescription: ${description}\nCDN Link: ${cdnLink}\nSession Duration: ${Math.floor(
                                 sessionDuration / 3600,
