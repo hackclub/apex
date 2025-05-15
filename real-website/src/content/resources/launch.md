@@ -20,7 +20,7 @@ _Check out [Pirate Ship](https://www.pirateship.com/) for cheap shipping rates!_
 
 ### Launch
 
-The Apex launch will be a 3-day event in Boston, hosted at the WPS Institute.
+The Apex launch will be a 3-day event in Boston, hosted at New England Sci-Tech.
 Below is a tentative schedule, but it is likely to change as more details are
 made available. Closer to the launch event, a comprehensive attendee guide will
 be published with all pertinent information.
@@ -29,7 +29,7 @@ be published with all pertinent information.
 
 #### Friday, June 20th
 
-05:00pm - Arrive at WPS
+05:00pm - Arrive at New England Sci-Tech
 
 05:30pm - Opening ceremony
 
@@ -49,13 +49,13 @@ be published with all pertinent information.
 
 12:30pm - Lunch
 
-01:00pm - Head back to WPS / Recovery process begins
+01:00pm - Head back to New England Sci-Tech / Recovery process begins
 
-02:00pm - Attendees arrive back at WPS
+02:00pm - Attendees arrive back at New England Sci-Tech
 
 03:00pm - Balloons are recovered
 
-04:00pm - Balloons arrive back at WPS / Begin analyzing results and making
+04:00pm - Balloons arrive back at New England Sci-Tech / Begin analyzing results and making
 presentations
 
 06:00pm - Dinner
