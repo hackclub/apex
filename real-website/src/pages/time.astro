@@ -490,7 +490,12 @@ export const prerender = false;
                                 document.querySelector(
                                     ".total-time",
                                 ).textContent;
+                            let pollCount = 0;
                             const pollInterval = setInterval(async () => {
+                                if (pollCount >= 5) {
+                                    clearInterval(pollInterval);
+                                    return;
+                                }
                                 await updateTotalTime();
                                 const currentTotalTime =
                                     document.querySelector(
@@ -499,6 +504,7 @@ export const prerender = false;
                                 if (currentTotalTime !== initialTotalTime) {
                                     clearInterval(pollInterval);
                                 }
+                                pollCount++;
                             }, 1000);
                             alert("Session ended successfully.");
                         } else {
@@ -526,7 +532,8 @@ export const prerender = false;
                         body: JSON.stringify({ token: apex_token }),
                     });
                     const data = await response.json();
-                    const totalTime = data.time || 0; // Default to 0 if no time is provided
+                    const totalTime = data.time || 0;
+                    console.log(totalTime);
                     const hours = Math.floor(totalTime / 3600)
                         .toString()
                         .padStart(2, "0");
@@ -669,8 +676,10 @@ export const prerender = false;
                     const reviewedStatus = session["reviewedStatus"];
 
                     let bgColorClass = "bg-yellow-200";
-
-                    if (reviewedStatus === "Not Approved") {
+                    
+                    if(reviewedStatus == undefined) {
+                        bgColorClass = "bg-yellow-200";
+                    } else if (reviewedStatus === "Not Approved") {
                         bgColorClass = "bg-red-200";
                     } else if(reviewedStatus.indexOf("Approved") !== -1) {
                         bgColorClass = "bg-green-200";

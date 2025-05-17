@@ -38,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
             {
                 id: records[0].id,
                 fields: {
-                    pauseTimeStart: new Date().toISOString()
+                    "Pause Time Start": new Date().toISOString()
                 }
             }
         ]);

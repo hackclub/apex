@@ -25,26 +25,23 @@ export const POST: APIRoute = async ({ request }) => {
             return new Response(JSON.stringify("User not found."), { status: 400 });
         }
 
-        const signupRecord = signupRecords[0];
-        const signupFields = signupRecord.fields['First name'];
-
         const sessionRecords = await base('Sessions').select({
             filterByFormula: `{Lookup} = '${token}'`,
             maxRecords: 1000,
-            sort: [{ field: 'startTime', direction: 'asc' }] // Sorting sessions by StartTime in ascending order
+            sort: [{ field: 'Start Time', direction: 'asc' }] // Sorting sessions by StartTime in ascending order
         }).firstPage();
 
         // Filter out sessions that have 'isCancelled' set to true
         const filteredSessionRecords = sessionRecords.filter(record => {
-            return record.fields.isCancelled !== true && record.fields.endTime !== undefined;  // Exclude sessions where 'isCancelled' is true or 'endTime' is blank
+            return record.fields.isCancelled !== true && record.fields["End Time"] !== undefined;  // Exclude sessions where 'isCancelled' is true or 'endTime' is blank
         });
 
         // Trim the sessionRecords to only include the fields key (index -> fields)
         const trimmedSessionRecords = filteredSessionRecords.map(record => {
             return {
                 ID: record.fields["ID"],
-                startTime: record.fields.startTime,
-                endTime: record.fields["endTime"],
+                startTime: record.fields["Start Time"],
+                endTime: record.fields["End Time"],
                 totalTime: record.fields["Total Time"],
                 reviewedStatus: record.fields.reviewedStatus,
                 moment: record.fields["Moment"],

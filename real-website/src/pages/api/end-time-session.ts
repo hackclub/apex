@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
             {
               id: records[0].id,
               fields: {
-                endTime: new Date().toISOString(),
+                "End Time": new Date().toISOString(),
                 Moment: description,
                 Video: vidLink
               }

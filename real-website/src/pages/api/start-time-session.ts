@@ -34,7 +34,7 @@ export const POST: APIRoute = async ({ request }) => {
               fields: {
                 ID: sessionId,
                 Signups: [signupRecord.id],
-                startTime: startTime
+                "Start Time": startTime
               }
             }
         ]);

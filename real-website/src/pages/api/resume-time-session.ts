@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
         }
 
         const previousPauseTime = records[0].fields.totalPauseTimeSeconds ?? 0;
-        const pauseTimeStart = records[0].fields.pauseTimeStart;
+        const pauseTimeStart = records[0].fields["Pause Time Start"];
         if (typeof pauseTimeStart !== 'string' && typeof pauseTimeStart !== 'number') {
             throw new Error('Invalid pauseTimeStart value');
         }
@@ -48,7 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
                 id: records[0].id,
                 fields: {
                     totalPauseTimeSeconds: newPauseTime,
-                    pauseTimeStart: new Date().toISOString()
+                    "Pause Time Start": new Date().toISOString()
                 }
             }
         ]);
