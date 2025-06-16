@@ -41,24 +41,26 @@ be published with all pertinent information.
 
 07:30am - Breakfast
 
-08:30am - Leave for launch site
+08:00am - Leave for launch site
 
-09:30am - Arrive at launch site
+09:00am - Arrive at launch site
 
-12:00pm - Balloons launched
+12:00pm - Lunch
 
-12:30pm - Lunch
+01:00pm - Balloons launched
 
-01:00pm - Head back to New England Sci-Tech / Recovery process begins
+03:00pm - Recovery process begins
 
-02:00pm - Attendees arrive back at New England Sci-Tech
+03:30pm - Attendees head back to New England Sci-Tech
 
-03:00pm - Balloons are recovered
+08:00pm - Balloons are recovered
 
-04:00pm - Balloons arrive back at New England Sci-Tech / Begin analyzing results and making
+09:00pm - Balloons arrive back at New England Sci-Tech
+
+09:30pm - Dinner
+
+10:00pm - Begin analyzing results and making
 presentations
-
-06:00pm - Dinner
 
 #### Sunday, June 22nd
 
@@ -70,8 +72,4 @@ presentations
 
 10:00am - Presentations begin
 
-11:00am - Voting
-
-11:30am - Awards
-
-12:00pm - Closing ceremony
+11:00am - Closing ceremony
